@@ -85,11 +85,13 @@ Zadaniem jest śledzenie konturu obiektu z wykorzystaniem czujników siły oraz 
 	\section{MRRROC++?}
 \chapter{Opis tego co zrobiono dotychczas}
 	\section{Konfiguracja środowiska}
-Zainstalowano ROS na stacji roboczej. Zainstalowano i skonfigurowano Eclipse. Założone nowe repozytorium na Githubie.		
+	Zainstalowano ROS na stacji roboczej. Zainstalowano i skonfigurowano Eclipse. Założone nowe repozytorium na Githubie.		
 	\section{Opanowanie podstaw języka Python}
-Skrypty irposa w Pythonie.
+	Skrypty irposa w Pythonie. Pakiet NumPy.
 	\section{Wykonanie specjalistycznego narzędzia do śledzenia krawędzi}
-Jakies zdjęcia etc.
+	W celu realizacja zadania śledzenia konturu konieczne było wykorzystanie specjalnego narzędzia.Zostało zaprojektowane tak aby robot mógł je chwycić. Ma utrzymać pewny chwyt podczas śledzenia krawędzi pomimo dużych sił występujących w miejscu kontaktu z obiektem.
+	
+	Jakies zdjęcia etc.
 	\section{Wykonanie ćwiczeń}
 		\subsection{Rysowanie kwadratu w powietrzu}
 		Ćwiczenie stanowiło dobre zapoznanie się z systemem IRPOS, oraz oswojenie z robotem.
@@ -98,12 +100,16 @@ Jakies zdjęcia etc.
 			\begin{enumerate}
 			\item Ustawić ramię w pozycji roboczej
 			\item Obniżać końcówkę do kontaktu z podłożem
-			\item Przesuwać narzędzie w osi X do kontaktu z Obręczą. Zapisać pozycję bezwzględną końcówki
-			\item Wykonać powyższe w osi X w przeciwnym kierunku...
+			\item Przesuwać narzędzie w osi X do kontaktu z obręczą. Zapisać pozycję bezwzględną końcówki
+			\item Wykonać powyższe w osi X w przeciwnym kierunku do znalezienia drugiego kontaktu.Zapisać pozycję bezwzględną końcówki
+			\item Przesuwać w osi y do znalezienie trzeciego kontaktu.Zapisać pozycję bezwzględną końcówki
+			\item Na podstawi trzech punktów wyliczyć analitycznie środek obręczy.
+			\item Przesunąć końcówkę do środka obręczy. 
 			\end{enumerate}
-		Celem ćwiczenia była nauka obsługi czujnika siły oraz korzystania z komponentu Numpy dla wektorów i macierzy.
-	\section{Zrealizowanie śledzenia prostej}
-		
+		Celem ćwiczenia była nauka obsługi czujnika siły oraz korzystania z Pakietu NumPy dla macierzy.
+	\section{Zrealizowanie śledzenia konturu prostego}
+		Stanowi punkt wyjścia zadania właściwego.
+			
 \chapter{Plany na kolejny semestr}
 	\section{Zrealizowanie śledzenia konturu}
 	\section{Opanowanie OpenCV i DisCODe}
