@@ -17,7 +17,7 @@
 
 
 \author{Maciej Lotz }
-\title{Robot Irp-6 w zadaniu śledzenia konturu}
+\title{Robot IRp-6 w zadaniu śledzenia konturu}
 \date{\today}
 
 
@@ -74,15 +74,36 @@
 \tableofcontents
 
 \chapter{Wymagania stawiane pracy}
+Zadaniem jest śledzenie konturu obiektu z wykorzystaniem czujników siły oraz wspomaganie procesu za pomocą odczytów z kamery.
 \chapter{Wstęp teoretyczny}
+	\section{Manipulator IRp-6}
+	\section{Czujnik siły}
+	\section{ROS/ORCOCOS}	
+	\section{IRPOS}
+	\section{DisCODe}
+	\section{Biblioteka OpenCV}
+	\section{MRRROC++?}
 \chapter{Opis tego co zrobiono dotychczas}
 	\section{Konfiguracja środowiska}
+Zainstalowano ROS na stacji roboczej. Zainstalowano i skonfigurowano Eclipse. Założone nowe repozytorium na Githubie.		
 	\section{Opanowanie podstaw języka Python}
+Skrypty irposa w Pythonie.
 	\section{Wykonanie specjalistycznego narzędzia do śledzenia krawędzi}
+Jakies zdjęcia etc.
 	\section{Wykonanie ćwiczeń}
-		\subsection{Rysowanie kwadratu w powierzu}
+		\subsection{Rysowanie kwadratu w powietrzu}
+		Ćwiczenie stanowiło dobre zapoznanie się z systemem IRPOS, oraz oswojenie z robotem.
 		\subsection{Znajdowanie środka okręgu na podstawie trzech punktów}
+		Przebieg algorytmu:
+			\begin{enumerate}
+			\item Ustawić ramię w pozycji roboczej
+			\item Obniżać końcówkę do kontaktu z podłożem
+			\item Przesuwać narzędzie w osi X do kontaktu z Obręczą. Zapisać pozycję bezwzględną końcówki
+			\item Wykonać powyższe w osi X w przeciwnym kierunku...
+			\end{enumerate}
+		Celem ćwiczenia była nauka obsługi czujnika siły oraz korzystania z komponentu Numpy dla wektorów i macierzy.
 	\section{Zrealizowanie śledzenia prostej}
+		
 \chapter{Plany na kolejny semestr}
 	\section{Zrealizowanie śledzenia konturu}
 	\section{Opanowanie OpenCV i DisCODe}
