@@ -6,16 +6,6 @@
 \usepackage[utf8]{inputenc} 
 \usepackage{graphicx}
 
-
-
-
-
-
-
-
-
-
-
 \author{Maciej Lotz }
 \title{Robot IRp-6 w zadaniu śledzenia konturu}
 \date{\today}
@@ -74,43 +64,65 @@
 \tableofcontents
 
 \chapter{Wymagania stawiane pracy}
-Zadaniem jest śledzenie konturu obiektu z wykorzystaniem czujników siły oraz wspomaganie procesu za pomocą odczytów z kamery.
+	\section{Cel pracy dyplomowej}
+	Celem pracy dyplomowej jest stworzenie i przetestowanie algorytmu realizującego śledzenie konturu obiektu z wykorzystaniem czujników siły oraz wspomaganie procesu za pomocą odczytów z kamery.
+	\section{Wizja rozwiązania}
+	Zadanie skład się z dwóch podzadań:
+		\subsection{Siłowe śledzenie konturu}
+		Polegać będzie na wykryciu wektora siły działającego na końcówkę narzędzia. Na podstawie tego wektora będzie można analitycznie wyznaczyć wektor prędkości, który ma być styczny do krawędzi i prostopadły do wektora siły. Teoretycznie umożliwi to poruszanie się po krawędzi z zachowaniem przyłożenia do niej zadanej siły.
+		\subsection{Wspomaganie wizyjne}
+		Powyższa metoda może być zawodna w przypadku gwałtownych zmian wektora siły, tzn. ostrych krawędzi konturu. W celu wyeliminowania takiego zagrożenia wprowadzę wspomaganie wizyjne, które na podstawie odczytów z kamery, będzie w stanie wykryć takie gwałtowne zmiany i odpowiednio zareagować. Widzę dwie możliwe realizację:
+			\subsubsection{Wspomaganie globalne}
+			Robot na początku sporządza mapę konturu i posiłkuje się nią w trakcie śledzenia konturu.
+			\subsubsection{Wspomaganie lokalne}
+			Robot śledzi kontur z kamerą skierowaną w kierunku wektora prędkości. W czasie rzeczywistym rozpoznaje załamania obiektu i jest w stanie odpowiednio szybko zareagować.
+			\subsubsection{Nie wykluczam zastosowania hybrydy obu powyższych rozwiązań.}
 \chapter{Wstęp teoretyczny}
 	\section{Manipulator IRp-6}
+	Manipulator IRp-6 to robot przemysłowy wykorzystywany w fabrykach do wykonywania czynności żmudnych lub niebezpiecznych. Na potrzeby laboratorium wzbogacony on został o końcówkę chwytną, kamerę oraz, w przypadku Tracka, mobilną platformę. 
 	\section{Czujnik siły}
-	\section{ROS/ORCOCOS}	
+	W ostatnim przegubie robot IRp-6 ma zainstalowane czujniki siły, które są w stanie wykryć siły działające na końcówkę chwytną. Mechanizm ten pozwoli śledzić krawędź przy zachowaniu odpowiedniego nacisku.
+	\section{ROS}
+	ROS(Robot Operating System) to zespół bibliotek i narzędzi, które pozwalają na budowę oprogramowania dla robotów. Zawiera sterowniki realizujące operacje niskopoziomowe. Umożliwia również komunikację międzywątkową i wizualizację robota w trójwymiarze.
 	\section{IRPOS}
-	\section{DisCODe}
-	\section{Biblioteka OpenCV}
-	\section{MRRROC++?}
+	Stworzony przez Zespół Programowania Robotów i Systemów Rozpoznających IRPOS to biblioteka wysokopoziomowych funkcji służących do sterowania robotem. Wykorzystanie i wprowadzanie modyfikacji jest względnie łatwe.
 \chapter{Opis tego co zrobiono dotychczas}
 	\section{Konfiguracja środowiska}
-	Zainstalowano ROS na stacji roboczej. Zainstalowano i skonfigurowano Eclipse. Założone nowe repozytorium na Githubie.		
+	W celu przygotowania do pracy w laboratorium wykonałem następujące czynności:
+		\begin{itemize}
+			\item Zainstalowano ROS na stacji roboczej.
+			\item Zainstalowano i skonfigurowano Eclipse.
+			\item Założono nowe repozytorium na Githubie.
+		\end{itemize}		
 	\section{Opanowanie podstaw języka Python}
-	Skrypty irposa w Pythonie. Pakiet NumPy.
+	Skrypty IRPOSa są napisane w języku Python, dlatego konieczne było opanowanie tego języka. Ponadto Zapoznałem się z pakietem naukowym NumPy. Pakiet NumPy umożliwia między innymi prowadzenie obliczeń na macierzach, co będzie mi potrzebne w głównym zadaniu pracy.
 	\section{Wykonanie specjalistycznego narzędzia do śledzenia krawędzi}
-	W celu realizacja zadania śledzenia konturu konieczne było wykorzystanie specjalnego narzędzia.Zostało zaprojektowane tak aby robot mógł je chwycić. Ma utrzymać pewny chwyt podczas śledzenia krawędzi pomimo dużych sił występujących w miejscu kontaktu z obiektem.
+	W celu realizacja zadania śledzenia konturu konieczne było wykorzystanie specjalnego narzędzia. Zostało zaprojektowane tak aby robot mógł je chwycić. Ma utrzymać pewny chwyt podczas śledzenia krawędzi pomimo dużych sił występujących w miejscu kontaktu z obiektem. Na końcu narzędzia zamontowano łożysko w celu wyeliminowania tarcia ze śledzonym konturem.
 	
-	Jakies zdjęcia etc.
-	\section{Wykonanie ćwiczeń}
+	\includegraphics[width=7.5cm,height=10cm]{images/MK3.jpg}
+	
+	Narzędzie do śledzenia krawędzi.
+	\section{Wykonanie ćwiczeń pobocznych}
 		\subsection{Rysowanie kwadratu w powietrzu}
-		Ćwiczenie stanowiło dobre zapoznanie się z systemem IRPOS, oraz oswojenie z robotem.
+		Ćwiczenie umożliwiło dobre zapoznanie się z systemem IRPOS, oraz oswojenie z robotem.
 		\subsection{Znajdowanie środka okręgu na podstawie trzech punktów}
 		Przebieg algorytmu:
 			\begin{enumerate}
 			\item Ustawić ramię w pozycji roboczej
 			\item Obniżać końcówkę do kontaktu z podłożem
 			\item Przesuwać narzędzie w osi X do kontaktu z obręczą. Zapisać pozycję bezwzględną końcówki
-			\item Wykonać powyższe w osi X w przeciwnym kierunku do znalezienia drugiego kontaktu.Zapisać pozycję bezwzględną końcówki
-			\item Przesuwać w osi y do znalezienie trzeciego kontaktu.Zapisać pozycję bezwzględną końcówki
+			\item Wykonać powyższe w osi X w przeciwnym kierunku do znalezienia drugiego kontaktu. Zapisać pozycję bezwzględną końcówki
+			\item Przesuwać w osi Y do znalezienie trzeciego kontaktu.Zapisać pozycję bezwzględną końcówki
 			\item Na podstawi trzech punktów wyliczyć analitycznie środek obręczy.
 			\item Przesunąć końcówkę do środka obręczy. 
 			\end{enumerate}
 		Celem ćwiczenia była nauka obsługi czujnika siły oraz korzystania z Pakietu NumPy dla macierzy.
 	\section{Zrealizowanie śledzenia konturu prostego}
-		Stanowi punkt wyjścia zadania właściwego.
+		Ćwiczenie polegało na śledzeniu konturu będącego prostą. Stanowiło pierwsze przymiarki do realizacji głównego zadania.
 			
 \chapter{Plany na kolejny semestr}
 	\section{Zrealizowanie śledzenia konturu}
+	Pierwszym zadaniem na przyszły semestr będzie stworzenie algorytmu śledzenia skomplikowanych krawędzi.
 	\section{Opanowanie OpenCV i DisCODe}
+	Konieczne będzie opanowanie bibliotek przetwarzania obrazu. Zamierzam wykorzystać odczyty z kamery do wspomagania śledzenia konturu.
 \end{document}
